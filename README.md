@@ -238,7 +238,7 @@ Users can:
 
 **Tran Huynh Duc Tai**
 
-Graduate Researcher | AI Engineer
+Fresher AI/ML Engineer
 
 Interests:
 

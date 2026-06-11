@@ -27,7 +27,7 @@ def create_vector_db(chunks):
 
 def save_vector_db(vector_db):
 
-    vector_db.save_local("../faiss_index")
+    vector_db.save_local("faiss_index")
 
 
 def load_vector_db():
@@ -35,7 +35,7 @@ def load_vector_db():
     embeddings = get_embeddings()
 
     db = FAISS.load_local(
-        "../faiss_index",
+        "faiss_index",
         embeddings,
         allow_dangerous_deserialization=True
     )

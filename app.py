@@ -145,7 +145,7 @@ col1, col2 = st.columns(2)
 with col1:
 
     if st.button(
-        "🫁 What is asthma?",
+        "What is asthma?",
         use_container_width=True
     ):
         st.session_state.selected_question = (
@@ -154,7 +154,7 @@ with col1:
         st.rerun()
 
     if st.button(
-        "🎙️ What sensors are used for lung sound analysis?",
+        "What sensors are used for lung sound analysis?",
         use_container_width=True
     ):
         st.session_state.selected_question = (
@@ -165,7 +165,7 @@ with col1:
 with col2:
 
     if st.button(
-        "📈 How is wheeze detected?",
+        "How is wheeze detected?",
         use_container_width=True
     ):
         st.session_state.selected_question = (
@@ -174,7 +174,7 @@ with col2:
         st.rerun()
 
     if st.button(
-        "🤖 What machine learning models are proposed?",
+        "What machine learning models are proposed?",
         use_container_width=True
     ):
         st.session_state.selected_question = (

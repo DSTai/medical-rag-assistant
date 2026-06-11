@@ -47,6 +47,7 @@ if uploaded_files:
         f"{len(uploaded_files)} PDF(s) uploaded."
     )
 
+
 if st.sidebar.button(
     "🔄 Build Knowledge Base"
 ):
@@ -62,7 +63,38 @@ if st.sidebar.button(
     st.sidebar.success(
         "Knowledge base updated!"
     )
+st.sidebar.markdown("---")
 
+pdf_count = 0
+
+if os.path.exists("data"):
+    pdf_count = len(
+        [
+            f for f in os.listdir("data")
+            if f.endswith(".pdf")
+        ]
+    )
+
+st.sidebar.markdown("### 📚 Knowledge Base")
+
+st.sidebar.metric(
+    "Papers",
+    pdf_count
+)
+
+st.sidebar.caption(
+    "Embedding: BGE-small-en-v1.5"
+)
+
+st.sidebar.caption(
+    "LLM: Gemini 2.5 Flash"
+)
+
+st.sidebar.caption(
+    "Retriever: FAISS + Reranker"
+)
+
+st.sidebar.markdown("---")
 # ==========================================
 # SESSION
 # ==========================================
@@ -72,7 +104,9 @@ if "rag" not in st.session_state:
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
-
+    
+if "selected_question" not in st.session_state:
+    st.session_state.selected_question = None
 # ==========================================
 # CHAT HISTORY
 # ==========================================
@@ -94,6 +128,59 @@ question = st.chat_input(
     "Ask a question..."
 )
 
+if st.session_state.selected_question:
+
+    question = (
+        st.session_state.selected_question
+    )
+
+    st.session_state.selected_question = None
+st.markdown("### 💡 Example Questions")
+
+if "selected_question" not in st.session_state:
+    st.session_state.selected_question = None
+
+col1, col2 = st.columns(2)
+
+with col1:
+
+    if st.button(
+        "🫁 What is asthma?",
+        use_container_width=True
+    ):
+        st.session_state.selected_question = (
+            "What is asthma?"
+        )
+        st.rerun()
+
+    if st.button(
+        "🎙️ What sensors are used for lung sound analysis?",
+        use_container_width=True
+    ):
+        st.session_state.selected_question = (
+            "What sensors are used for lung sound analysis?"
+        )
+        st.rerun()
+
+with col2:
+
+    if st.button(
+        "📈 How is wheeze detected?",
+        use_container_width=True
+    ):
+        st.session_state.selected_question = (
+            "How is wheeze detected?"
+        )
+        st.rerun()
+
+    if st.button(
+        "🤖 What machine learning models are proposed?",
+        use_container_width=True
+    ):
+        st.session_state.selected_question = (
+            "What machine learning models are proposed?"
+        )
+        st.rerun()
 if question:
 
     st.session_state.messages.append(
